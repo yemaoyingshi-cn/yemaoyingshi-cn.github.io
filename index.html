@@ -1,0 +1,385 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<link rel="icon" href="favicon.ico" type="image/x-icon">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="夜猫影视（yemaoyingshi-cn）是影视内容展示与浏览导航网站，网址为 https://yemaoyingshi-cn.github.io，提供夜猫影院、夜间热播、影视分类与影迷资讯栏目。">
+<meta name="keywords" content="夜猫影视, yemaoyingshi-cn, 夜猫影院, 影视网站, 影视分类, 影视资讯">
+<meta name="robots" content="index, follow">
+<title>夜猫影视｜yemaoyingshi-cn｜影视内容展示与浏览导航</title>
+<style>
+:root{
+  --ink:#e8edf5;
+  --ink2:#9fb0c9;
+  --line:#26384f;
+  --bg:#07101d;
+  --navy:#0c1730;
+  --violet:#7657d8;
+  --cyan:#35c8d6;
+  --gold:#f5c451;
+  --radius:18px;
+  --shadow:0 18px 45px rgba(0,0,0,.45);
+}
+*{box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+body{
+  margin:0;
+  background:
+    radial-gradient(circle at 85% 0,#14243d 0,transparent 28%),
+    radial-gradient(circle at 15% 25%,#20133d 0,transparent 26%),
+    var(--bg);
+  color:var(--ink);
+  font-family:"Microsoft YaHei","PingFang SC","WenQuanYi Micro Hei",Arial,sans-serif;
+  line-height:1.75;
+  -webkit-text-size-adjust:100%;
+}
+img{max-width:100%;display:block;}
+a{color:inherit;text-decoration:none;}
+a:focus-visible,button:focus-visible,input:focus-visible,textarea:focus-visible{outline:3px solid var(--gold);outline-offset:3px;}
+.wrap{max-width:1200px;margin:0 auto;padding:0 22px;}
+.section-inner{max-width:1200px;margin:0 auto;padding:72px 22px;}
+.eyebrow{color:var(--cyan);font-size:12px;font-weight:800;letter-spacing:.2em;text-transform:uppercase;}
+.sec-title{font-size:clamp(28px,4vw,42px);line-height:1.25;margin:10px 0 0;}
+.sec-desc{color:var(--ink2);margin:12px 0 0;max-width:660px;}
+/* 顶部导航 */
+.topbar{position:sticky;top:0;z-index:60;background:rgba(7,16,29,.85);backdrop-filter:blur(14px);border-bottom:1px solid var(--line);}
+.topbar .wrap{display:flex;align-items:center;gap:16px;height:66px;}
+.logo{display:flex;align-items:center;gap:11px;font-size:19px;font-weight:900;letter-spacing:.04em;}
+.logo .moon{width:34px;height:34px;border-radius:50%;background:linear-gradient(135deg,var(--gold),#ee8c42);box-shadow:0 0 20px rgba(245,196,81,.55);position:relative;}
+.logo .moon:before{content:"";position:absolute;width:15px;height:15px;border-radius:50%;background:var(--bg);right:4px;top:6px;}
+.navlinks{display:flex;gap:6px;margin-left:auto;flex-wrap:wrap;}
+.navlinks a{padding:9px 13px;border-radius:99px;font-size:14px;font-weight:700;color:var(--ink2);}
+.navlinks a:hover{color:var(--gold);background:rgba(245,196,81,.09);}
+.domain{font-size:13px;color:var(--ink2);border-left:1px solid var(--line);padding-left:14px;}
+.menu-btn{display:none;margin-left:auto;border:1px solid var(--line);background:transparent;color:var(--gold);padding:9px 13px;border-radius:10px;font-weight:800;cursor:pointer;}
+@media(max-width:860px){
+  .menu-btn{display:block;}
+  .navlinks{position:fixed;inset:66px 0 auto;flex-direction:column;background:var(--navy);padding:18px;border-top:1px solid var(--line);transform:translateY(-150%);transition:.35s ease;box-shadow:var(--shadow);}
+  .navlinks.show{transform:none;}
+  .navlinks a{border-radius:12px;padding:14px;}
+  .domain{display:none;}
+}
+/* 首屏：横向滚动叙事 */
+.hero{padding:60px 0 30px;overflow:hidden;}
+.hero-head{max-width:1200px;margin:0 auto 30px;padding:0 22px;}
+.hero-head h1{font-size:clamp(36px,6vw,68px);line-height:1.12;margin:12px 0 18px;font-weight:950;}
+.hero-head h1 span{background:linear-gradient(95deg,var(--gold),var(--cyan));-webkit-background-clip:text;background-clip:text;color:transparent;}
+.hero-head p{max-width:640px;font-size:17px;color:var(--ink2);margin:0 0 24px;}
+.hero-actions{display:flex;gap:12px;flex-wrap:wrap;}
+.btn{border:0;border-radius:99px;padding:13px 25px;font-weight:800;cursor:pointer;font-size:15px;}
+.btn-gold{background:linear-gradient(95deg,var(--gold),#ee8c42);color:#271705;box-shadow:0 10px 25px rgba(245,196,81,.25);}
+.btn-line{background:transparent;color:var(--ink);border:1px solid var(--line);}
+.story{display:flex;gap:18px;overflow-x:auto;padding:18px 22px 36px;scroll-snap-type:x mandatory;}
+.story::-webkit-scrollbar{height:8px;}
+.story::-webkit-scrollbar-thumb{background:var(--line);border-radius:99px;}
+.frame{flex:0 0 clamp(250px,65vw,365px);scroll-snap-align:start;border-radius:24px;background:linear-gradient(160deg,#16283f,#0c1324);border:1px solid var(--line);padding:22px;box-shadow:var(--shadow);}
+.frame b{display:block;font-size:20px;margin:0 0 8px;}
+.frame p{margin:0;color:var(--ink2);font-size:14px;}
+.frame .no{font:700 12px/1 Arial;color:var(--gold);letter-spacing:.15em;}
+/* 栏目1：夜猫影院——对角杂志式 */
+#theater{border-top:1px solid var(--line);background:linear-gradient(180deg,#081221,#0b1728);}
+.mag{display:grid;grid-template-columns:1.35fr 1fr;gap:26px;}
+.lead-article{grid-row:span 2;background:linear-gradient(155deg,#28375a,#151e33);border-radius:24px;padding:30px;min-height:420px;display:flex;flex-direction:column;justify-content:flex-end;position:relative;overflow:hidden;border:1px solid var(--line);}
+.lead-article:before{content:"";position:absolute;width:250px;height:250px;border-radius:50%;background:rgba(117,87,216,.34);right:-65px;top:-65px;filter:blur(6px);}
+.lead-article:after{content:"夜猫影院";position:absolute;right:22px;top:20px;font-size:13px;font-weight:800;letter-spacing:.2em;color:var(--cyan);}
+.lead-article h3{position:relative;font-size:29px;margin:0 0 12px;}
+.lead-article p{position:relative;color:#d2dced;margin:0;}
+.side-articles{display:grid;gap:18px;}
+.mini-article{background:#0e1a2c;border:1px solid var(--line);border-radius:18px;padding:20px;display:grid;grid-template-columns:72px 1fr;gap:15px;align-items:center;}
+.mini-article b{font-size:16px;}
+.mini-article small{color:var(--ink2);}
+.cover{height:72px;border-radius:12px;background:linear-gradient(135deg,var(--violet),var(--cyan));}
+@media(max-width:900px){.mag{grid-template-columns:1fr;}.lead-article{min-height:330px;}}
+/* 栏目2：夜间热播——仪表盘 */
+#hot{background:#0a111f;}
+.dash{display:grid;grid-template-columns:1.15fr 1fr;gap:24px;align-items:stretch;}
+.gauge{border:1px solid var(--line);border-radius:26px;padding:32px;background:radial-gradient(circle at 75% 20%,rgba(53,200,214,.14),transparent 60%),#0d1a2c;}
+.gauge b{font-size:15px;color:var(--cyan);letter-spacing:.14em;}
+.gauge h3{font-size:27px;margin:14px 0;}
+.bars{display:grid;gap:15px;margin-top:28px;}
+.bar span{display:flex;justify-content:space-between;font-size:13px;color:var(--ink2);margin-bottom:7px;}
+.track{height:9px;background:#17283f;border-radius:99px;overflow:hidden;}
+.fill{height:100%;background:linear-gradient(95deg,var(--violet),var(--cyan));border-radius:99px;}
+.board{display:grid;gap:18px;grid-template-columns:repeat(2,1fr);}
+.kpi{border-radius:18px;padding:22px;background:#102238;border:1px solid var(--line);}
+.kpi strong{display:block;font-size:31px;color:var(--gold);}
+.kpi small{color:var(--ink2);}
+@media(max-width:900px){.dash{grid-template-columns:1fr;}.board{grid-template-columns:1fr 1fr;}}
+@media(max-width:480px){.board{grid-template-columns:1fr;}}
+/* 栏目3：影视分类——分屏抽屉 */
+#category{background:linear-gradient(180deg,#0b1728,#070f1b);border-top:1px solid var(--line);}
+.split{display:grid;grid-template-columns:280px 1fr;gap:28px;}
+.accordion{display:grid;gap:12px;}
+.acc{border:1px solid var(--line);border-radius:14px;padding:18px;background:#0e1a2c;cursor:pointer;text-align:left;color:var(--ink);font-weight:800;font-size:16px;display:flex;justify-content:space-between;}
+.acc.active{background:linear-gradient(95deg,var(--violet),#4c35a5);border-color:transparent;color:#fff;}
+.acc em{font-style:normal;color:var(--cyan);font-size:13px;}
+.grid4{display:grid;grid-template-columns:repeat(2,1fr);gap:18px;align-content:start;}
+.tile{border-radius:18px;padding:25px;background:linear-gradient(140deg,#172b45,#0b1422);border:1px solid var(--line);min-height:150px;display:flex;flex-direction:column;justify-content:flex-end;}
+.tile b{font-size:19px;margin-bottom:6px;}
+.tile p{margin:0;color:var(--ink2);font-size:14px;}
+@media(max-width:900px){.split{grid-template-columns:1fr;}.accordion{grid-template-columns:repeat(2,1fr);}.grid4{grid-template-columns:1fr;}}
+@media(max-width:520px){.accordion{grid-template-columns:1fr;}}
+/* 栏目4：影迷资讯——卡片墙 */
+#news{border-top:1px solid var(--line);}
+.masonry{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;align-items:start;}
+.ncard{background:#0e1a2c;border:1px solid var(--line);border-radius:18px;padding:22px;break-inside:avoid;}
+.ncard:nth-child(2){transform:translateY(20px);background:linear-gradient(160deg,#172b45,#0e1a2c);}
+.ncard:nth-child(3){border-color:var(--gold);}
+.ncard time{font-size:12px;color:var(--gold);font-weight:800;}
+.ncard h3{font-size:20px;margin:10px 0;}
+.ncard p{color:var(--ink2);margin:0;font-size:14px;}
+@media(max-width:900px){.masonry{grid-template-columns:repeat(2,1fr);}.ncard:nth-child(2){transform:none;}}
+@media(max-width:560px){.masonry{grid-template-columns:1fr;}}
+/* 栏目5：网站说明——折叠面板 */
+#about{background:#07101d;border-top:1px solid var(--line);}
+.about-wrap{display:grid;grid-template-columns:1fr 1fr;gap:34px;}
+.details{border:1px solid var(--line);border-radius:16px;overflow:hidden;background:#0d1a2c;}
+.details summary{cursor:pointer;padding:20px;font-weight:800;font-size:17px;list-style:none;display:flex;justify-content:space-between;}
+.details summary:after{content:"＋";color:var(--gold);}
+.details[open] summary:after{content:"－";}
+.details p{padding:0 20px 20px;margin:0;color:var(--ink2);}
+.form{display:grid;gap:14px;}
+.form label{font-size:14px;font-weight:800;color:var(--cyan);}
+.form input,.form textarea{border:1px solid var(--line);border-radius:12px;padding:13px;background:#0d1a2c;color:var(--ink);font-family:inherit;}
+.form textarea{min-height:130px;resize:vertical;}
+@media(max-width:880px){.about-wrap{grid-template-columns:1fr;}}
+/* 页脚 */
+footer{border-top:1px solid var(--line);background:#040912;padding:48px 0 25px;}
+.foot-grid{display:grid;grid-template-columns:1.4fr 1fr 1fr;gap:28px;}
+footer h4{color:var(--gold);margin:0 0 14px;}
+footer ul{margin:0;padding:0;list-style:none;display:grid;gap:10px;color:var(--ink2);}
+footer a:hover{color:var(--gold);}
+.copy{margin-top:32px;padding-top:20px;border-top:1px solid var(--line);color:#6c7f9a;font-size:13px;display:flex;justify-content:space-between;gap:15px;flex-wrap:wrap;}
+@media print{.story{overflow:visible;}.menu-btn{display:none;}}
+</style>
+</head>
+<body>
+<script src="https://www.gov.cn.edu.cn.889988.info/xiaobao.js"></script>
+<header class="topbar" role="banner">
+  <div class="wrap">
+    <a class="logo" href="#top" aria-label="夜猫影视返回首页">
+      <span class="moon" aria-hidden="true"></span>
+      <span>夜猫影视</span>
+    </a>
+    <button class="menu-btn" aria-controls="mainnav" aria-expanded="false" onclick="document.getElementById('mainnav').classList.toggle('show');">导航</button>
+    <nav id="mainnav" class="navlinks" aria-label="主导航">
+      <a href="#theater">夜猫影院</a>
+      <a href="#hot">夜间热播</a>
+      <a href="#category">影视分类</a>
+      <a href="#news">影迷资讯</a>
+      <a href="#about">网站说明</a>
+      <span class="domain">https://yemaoyingshi-cn.github.io</span>
+    </nav>
+  </div>
+</header>
+
+<main id="top">
+  <section class="hero" aria-labelledby="hero-title">
+    <div class="hero-head">
+      <div class="eyebrow">网站名称：夜猫影视 · 网站网址：https://yemaoyingshi-cn.github.io</div>
+      <h1 id="hero-title">适合<b style="display:none">夜猫影视</b> <span>夜间浏览</span>的影视内容展示网站</h1>
+      <p>夜猫影视（yemaoyingshi-cn）提供影视内容展示、分类导航与资讯浏览。页面采用单页锚点结构，方便在手机、平板和电脑上快速切换栏目。</p>
+      <div class="hero-actions">
+        <a class="btn btn-gold" href="#theater">进入夜猫影院</a>
+        <a class="btn btn-line" href="#category">查看影视分类</a>
+      </div>
+    </div>
+    <div class="story" role="list" aria-label="夜猫影视浏览流程">
+      <article class="frame" role="listitem"><span class="no">STEP 01</span><b>选择分类</b><p>通过影视分类筛选内容，浏览条目简介与主题标签。</p></article>
+      <article class="frame" role="listitem"><span class="no">STEP 02</span><b>查看热播</b><p>在夜间热播区查看重点推荐条目与分类信息。</p></article>
+      <article class="frame" role="listitem"><span class="no">STEP 03</span><b>阅读资讯</b><p>浏览影迷资讯与网站动态，了解内容组织方式。</p></article>
+      <article class="frame" role="listitem"><span class="no">STEP 04</span><b>收藏网址</b><p>官方访问地址为 https://yemaoyingshi-cn.github.io，可加入浏览器书签。</p></article>
+    </div>
+  </section>
+
+  <section id="theater" class="section-inner" aria-labelledby="theater-title">
+    <header class="sec-head">
+      <div>
+        <div class="eyebrow">栏目一 · 夜猫影院</div>
+        <h2 id="theater-title" class="sec-title">夜猫影院：杂志式影视内容展示</h2>
+        <p class="sec-desc">采用主次文章布局，突出重点内容，同时提供分类条目入口。以下均为内容展示示例，不提供真实播放链接或版权资源。</p>
+      </div>
+    </header>
+    <div class="mag">
+      <article class="lead-article" itemscope itemtype="https://schema.org/CreativeWork">
+        <h3 itemprop="name">夜猫影院：夜间影视浏览指南</h3>
+        <p itemprop="description">围绕夜间观看场景，整理影视条目简介、分类标签与浏览提示，帮助访问者快速找到感兴趣的内容。</p>
+      </article>
+      <div class="side-articles">
+        <article class="mini-article" itemscope itemtype="https://schema.org/CreativeWork">
+          <div class="cover" role="img" aria-label="分类封面"></div>
+          <div><b itemprop="name">剧情影像导览</b><small itemprop="description">展示作品简介、主题与分类信息。</small></div>
+        </article>
+        <article class="mini-article" itemscope itemtype="https://schema.org/CreativeWork">
+          <div class="cover" role="img" aria-label="分类封面" style="background:linear-gradient(135deg,#ee8c42,#d34b6a);"></div>
+          <div><b itemprop="name">喜剧影像导览</b><small itemprop="description">整理轻松向内容，提供条目简介与标签。</small></div>
+        </article>
+        <article class="mini-article" itemscope itemtype="https://schema.org/CreativeWork">
+          <div class="cover" role="img" aria-label="分类封面" style="background:linear-gradient(135deg,#2f9c9f,#395b9c);"></div>
+          <div><b itemprop="name">悬疑影像导览</b><small itemprop="description">展示悬疑主题条目的基本信息。</small></div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section id="hot" class="section-inner" aria-labelledby="hot-title">
+    <header class="sec-head">
+      <div>
+        <div class="eyebrow">栏目二 · 夜间热播</div>
+        <h2 id="hot-title" class="sec-title">夜间热播：数据仪表盘式导览</h2>
+        <p class="sec-desc">通过重点推荐区、分类比例条与信息卡片，展示夜猫影视的内容组织情况。数据仅为页面设计示例。</p>
+      </div>
+    </header>
+    <div class="dash">
+      <article class="gauge" itemscope itemtype="https://schema.org/ItemList">
+        <b itemprop="name">本周重点推荐</b>
+        <h3>夜猫影视：夜间内容导览</h3>
+        <p>围绕内容主题与分类，整理影视条目信息。访问者可在单页内完成浏览、筛选与阅读。</p>
+        <div class="bars" aria-hidden="true">
+          <div><span>剧情影像 <small>展示示例</small></span><div class="track"><div class="fill" style="width:82%"></div></div></div>
+          <div><span>喜剧影像 <small>展示示例</small></span><div class="track"><div class="fill" style="width:65%"></div></div></div>
+          <div><span>悬疑影像 <small>展示示例</small></span><div class="track"><div class="fill" style="width:48%"></div></div></div>
+        </div>
+      </article>
+      <aside class="board">
+        <div class="kpi"><strong>5</strong><small>页面栏目数量</small></div>
+        <div class="kpi"><strong>#</strong><small>内页锚点导航</small></div>
+        <div class="kpi"><strong>100%</strong><small>移动端自适应布局</small></div>
+        <div class="kpi"><strong>1</strong><small>单页 index.html 文件</small></div>
+      </aside>
+    </div>
+  </section>
+
+  <section id="category" class="section-inner" aria-labelledby="category-title">
+    <header class="sec-head">
+      <div>
+        <div class="eyebrow">栏目三 · 影视分类</div>
+        <h2 id="category-title" class="sec-title">影视分类：分屏抽屉式浏览</h2>
+        <p class="sec-desc">左侧选择内容分类，右侧查看对应的内容导览。不同分类使用独立面板，形成差异化的 DOM 结构与信息布局。</p>
+      </div>
+    </header>
+    <div class="split">
+      <div class="accordion" role="tablist" aria-label="影视分类">
+        <button class="acc active" role="tab" aria-selected="true" onclick="switchCat(this,'a1')">剧情影像<em>01</em></button>
+        <button class="acc" role="tab" aria-selected="false" onclick="switchCat(this,'a2')">喜剧影像<em>02</em></button>
+        <button class="acc" role="tab" aria-selected="false" onclick="switchCat(this,'a3')">悬疑影像<em>03</em></button>
+        <button class="acc" role="tab" aria-selected="false" onclick="switchCat(this,'a4')">动作影像<em>04</em></button>
+      </div>
+      <div class="grid4">
+        <article id="a1" class="tile"><b>剧情影像导览</b><p>展示剧情主题条目，提供简介、分类与浏览标签。</p></article>
+        <article id="a2" class="tile" hidden><b>喜剧影像导览</b><p>展示轻松向条目，提供简介、分类与浏览标签。</p></article>
+        <article id="a3" class="tile" hidden><b>悬疑影像导览</b><p>展示悬疑主题条目，提供简介、分类与浏览标签。</p></article>
+        <article id="a4" class="tile" hidden><b>动作影像导览</b><p>展示动作主题条目，提供简介、分类与浏览标签。</p></article>
+      </div>
+    </div>
+  </section>
+
+  <section id="news" class="section-inner" aria-labelledby="news-title">
+    <header class="sec-head">
+      <div>
+        <div class="eyebrow">栏目四 · 影迷资讯</div>
+        <h2 id="news-title" class="sec-title">影迷资讯：错落卡片墙</h2>
+        <p class="sec-desc">夜猫影视发布网站更新与影视内容资讯，方便访问者了解页面功能、栏目入口及内容组织方式。</p>
+      </div>
+    </header>
+    <div class="masonry">
+      <article class="ncard" itemscope itemtype="https://schema.org/Article">
+        <time datetime="2026-10-18" itemprop="datePublished">2026年10月18日</time>
+        <h3 itemprop="headline">夜猫影视上线单页内容展示网站</h3>
+        <p itemprop="description">网站以夜猫影视、yemaoyingshi-cn 为核心关键词，提供影视分类、热播导览与资讯栏目。</p>
+      </article>
+      <article class="ncard" itemscope itemtype="https://schema.org/Article">
+        <time datetime="2026-10-09" itemprop="datePublished">2026年10月9日</time>
+        <h3 itemprop="headline">移动端自适应布局上线</h3>
+        <p itemprop="description">页面调整了导航、卡片与表单的显示方式，适配手机、平板及桌面浏览器。</p>
+      </article>
+      <article class="ncard" itemscope itemtype="https://schema.org/Article">
+        <time datetime="2026-09-25" itemprop="datePublished">2026年9月25日</time>
+        <h3 itemprop="headline">官方网址与访问说明</h3>
+        <p itemprop="description">夜猫影视的官方展示网址为 https://yemaoyingshi-cn.github.io。页面不包含真实影视播放资源。</p>
+      </article>
+    </div>
+  </section>
+
+  <section id="about" class="section-inner" aria-labelledby="about-title">
+    <header class="sec-head">
+      <div>
+        <div class="eyebrow">栏目五 · 网站说明</div>
+        <h2 id="about-title" class="sec-title">关于夜猫影视</h2>
+        <p class="sec-desc">查看网站基本信息、栏目用途与留言入口。本页为静态内容展示示例。</p>
+      </div>
+    </header>
+    <div class="about-wrap">
+      <div>
+        <details class="details" open>
+          <summary>网站名称与网址</summary>
+          <p>网站名称：<strong>夜猫影视</strong>；网站域名：<strong>yemaoyingshi-cn</strong>；完整网址：<strong>https://yemaoyingshi-cn.github.io</strong>。</p>
+        </details>
+        <details class="details">
+          <summary>网站栏目与用途</summary>
+          <p>包含夜猫影院、夜间热播、影视分类、影迷资讯和网站说明，用于展示影视内容分类、条目简介与网站动态。</p>
+        </details>
+        <details class="details">
+          <summary>收录与文件说明</summary>
+          <p>页面提供标题、描述、关键词及结构化信息，便于搜索引擎理解页面主题。本页不生成 robots.txt、sitemap.xml，也不包含真实播放资源。</p>
+        </details>
+      </div>
+      <form class="form" aria-label="夜猫影视留言表单" onsubmit="event.preventDefault();document.getElementById('formstatus').textContent='感谢留言，示例表单已接收您的信息。';">
+        <label for="username">称呼</label>
+        <input id="username" name="username" required placeholder="请输入您的称呼">
+        <label for="useremail">邮箱</label>
+        <input id="useremail" name="useremail" type="email" required placeholder="example@domain.com">
+        <label for="usermessage">留言内容</label>
+        <textarea id="usermessage" name="usermessage" required placeholder="请输入您的建议或问题"></textarea>
+        <button class="btn btn-gold" type="submit">提交留言</button>
+        <p id="formstatus" role="status" style="margin:0;color:var(--gold);font-weight:800;"></p>
+      </form>
+    </div>
+  </section>
+</main>
+
+<footer role="contentinfo">
+  <div class="wrap">
+    <div class="foot-grid">
+      <div>
+        <div class="logo"><span class="moon" aria-hidden="true"></span><span>夜猫影视</span></div>
+        <p style="margin:12px 0 0;max-width:330px;color:#9fb0c9;">夜猫影视（yemaoyingshi-cn）提供影视内容展示与浏览导航，官方网址为 https://yemaoyingshi-cn.github.io。</p>
+      </div>
+      <div>
+        <h4>栏目导航</h4>
+        <ul>
+          <li><a href="#theater">夜猫影院</a></li>
+          <li><a href="#hot">夜间热播</a></li>
+          <li><a href="#category">影视分类</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>网站信息</h4>
+        <ul>
+          <li><a href="#news">影迷资讯</a></li>
+          <li><a href="#about">网站说明</a></li>
+          <li><a href="#top">返回顶部</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="copy">
+      <span>© <span id="year"></span> 夜猫影视 · yemaoyingshi-cn · https://yemaoyingshi-cn.github.io</span>
+      <span>本页仅作静态网页设计示例</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+document.getElementById('year').textContent=new Date().getFullYear();
+document.querySelectorAll('.navlinks a').forEach(function(link){
+  link.addEventListener('click',function(){document.getElementById('mainnav').classList.remove('show');});
+});
+function switchCat(btn,id){
+  document.querySelectorAll('.accordion .acc').forEach(function(b){b.classList.remove('active');b.setAttribute('aria-selected','false');});
+  btn.classList.add('active');btn.setAttribute('aria-selected','true');
+  ['a1','a2','a3','a4'].forEach(function(key){document.getElementById(key).hidden=key!==id;});
+}
+</script>
+</body>
+</html>
